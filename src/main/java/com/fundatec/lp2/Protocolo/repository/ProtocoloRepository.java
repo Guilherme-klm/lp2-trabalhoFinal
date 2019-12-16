@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface ProtocoloRepository extends CrudRepository<Protocolo, String> {
 
-    public List<Protocolo> findAll ();
-
 }

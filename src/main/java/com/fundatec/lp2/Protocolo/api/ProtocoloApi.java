@@ -21,8 +21,8 @@ public class ProtocoloApi {
         this.protocoloMapper = protocoloMapper;
     }
 
-    @PostMapping("/protocolo")
-    public ResponseEntity<?> postProtocolo (@Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
+    @PostMapping("/protocolos")
+    public ResponseEntity<?> postProtocolos (@Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
         try {
             Protocolo protocolo = protocoloMapper.mapear(protocoloInputDTO);
             ProtocoloOutputDTO protocoloOutputDTO = protocoloMapper.mapear(protocolo);
@@ -34,13 +34,27 @@ public class ProtocoloApi {
         }
     }
 
-    @GetMapping("/protocolo")
-    public ResponseEntity<?> getProtocolo () {
+    @PutMapping("/protocolos/{id}")
+    public ResponseEntity<?> atualizarProtocolo (@PathVariable String id,
+                                                 @Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
+
+        Protocolo protocolo = protocoloMapper.mapear(protocoloInputDTO);
+        protocolo = protocoloService.atualizar(id, protocolo);
+
+        if (protocolo == null) {
+            return ResponseEntity.noContent().build();
+        }
+        ProtocoloOutputDTO protocoloOutputDTO = protocoloMapper.mapear(protocolo);
+        return ResponseEntity.ok().body(protocoloOutputDTO);
+    }
+
+    @GetMapping("/protocolos")
+    public ResponseEntity<?> getProtocolos () {
         List<Protocolo> protocoloOutputDTOList = protocoloService.getProtocolo();
         return getResponseEntity(protocoloOutputDTOList);
     }
 
-    @GetMapping("/protocolo/{id}")
+    @GetMapping("/protocolos/{id}")
     public ResponseEntity<ProtocoloOutputDTO> getProtocoloId (@PathVariable String nomeProtocolo) {
         Protocolo protocolo = protocoloService.filtrarPorProtocolo(nomeProtocolo);
 
@@ -50,6 +64,12 @@ public class ProtocoloApi {
             ProtocoloOutputDTO protocoloOutputDTO = protocoloMapper.mapear(protocolo);
             return ResponseEntity.ok(protocoloOutputDTO);
         }
+    }
+
+    @DeleteMapping("/protocolos/{id}")
+    public ResponseEntity<?> excluirProtocolo (@PathVariable String id) {
+        protocoloService.exluirPorId(id);
+        return ResponseEntity.ok().build();
     }
 
     private ResponseEntity<?> getResponseEntity(List<Protocolo> protocolos) {

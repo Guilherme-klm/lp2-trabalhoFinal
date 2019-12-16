@@ -23,10 +23,27 @@ public class ProtocoloService {
     }
 
     public List<Protocolo> getProtocolo () {
-        return protocoloRepository.findAll();
+        return (List<Protocolo>) protocoloRepository.findAll();
+    }
+
+    public Protocolo atualizar (String id, Protocolo protocoloParaAtualizar) {
+        Protocolo protocolo = filtrarPorProtocolo(id);
+        if (protocolo != null) {
+            protocolo.setNumeroProtocolo(protocoloParaAtualizar.getNumeroProtocolo());
+            protocolo.setSite(protocoloParaAtualizar.getSite());
+            protocolo.setConcessionaria(protocoloParaAtualizar.getConcessionaria());
+            protocolo.setUnidadeConsumidora(protocoloParaAtualizar.getUnidadeConsumidora());
+            protocolo.setObservacoes(protocoloParaAtualizar.getObservacoes());
+            protocolo = protocoloRepository.save(protocolo);
+        }
+        return protocolo;
     }
 
     public Protocolo filtrarPorProtocolo(String nome) {
         return protocoloRepository.findById(nome).orElse(null);
+    }
+
+    public void exluirPorId (String id) {
+        protocoloRepository.deleteById(id);
     }
 }
