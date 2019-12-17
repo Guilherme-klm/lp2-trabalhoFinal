@@ -35,7 +35,7 @@ public class AtualizarProtocoloTest {
 
         protocoloRepository.deleteAll();
 
-        Protocolo protocolo = new Protocolo();
+        protocolo = new Protocolo();
         protocolo.setNumeroProtocolo("2019RXUEA");
         protocolo.setSite("U51003");
         protocolo.setUnidadeConsumidora("VIVO");
@@ -58,7 +58,7 @@ public class AtualizarProtocoloTest {
                        "\t\"observacoes\": \"Houve um acidente\"\n" +
                        "}")
                .when()
-               .put("/protocolos/{id}", protocolo.getNumeroProtocolo())
+               .put("/protocolos/{id}", protocolo.getId())
                .then()
                .statusCode(HttpStatus.OK.value())
                .extract()

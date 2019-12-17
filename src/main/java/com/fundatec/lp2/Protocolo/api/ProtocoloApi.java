@@ -35,7 +35,7 @@ public class ProtocoloApi {
     }
 
     @PutMapping("/protocolos/{id}")
-    public ResponseEntity<?> atualizarProtocolo (@PathVariable String id,
+    public ResponseEntity<?> atualizarProtocolo (@PathVariable Long id,
                                                  @Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
 
         Protocolo protocolo = protocoloMapper.mapear(protocoloInputDTO);
@@ -55,8 +55,8 @@ public class ProtocoloApi {
     }
 
     @GetMapping("/protocolos/{id}")
-    public ResponseEntity<ProtocoloOutputDTO> getProtocoloId (@PathVariable String nomeProtocolo) {
-        Protocolo protocolo = protocoloService.filtrarPorProtocolo(nomeProtocolo);
+    public ResponseEntity<ProtocoloOutputDTO> getProtocoloId (@PathVariable Long id) {
+        Protocolo protocolo = protocoloService.filtrarPorProtocolo(id);
 
         if (protocolo == null) {
             return ResponseEntity.noContent().build();
@@ -67,7 +67,7 @@ public class ProtocoloApi {
     }
 
     @DeleteMapping("/protocolos/{id}")
-    public ResponseEntity<?> excluirProtocolo (@PathVariable String id) {
+    public ResponseEntity<?> excluirProtocolo (@PathVariable Long id) {
         protocoloService.exluirPorId(id);
         return ResponseEntity.ok().build();
     }

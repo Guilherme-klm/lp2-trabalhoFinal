@@ -32,7 +32,7 @@ public class ExcluirProtocoloTest {
 
         protocoloRepository.deleteAll();
 
-        Protocolo protocolo = new Protocolo();
+        protocolo = new Protocolo();
         protocolo.setNumeroProtocolo("2019RXUEA");
         protocolo.setSite("U51003");
         protocolo.setUnidadeConsumidora("VIVO");
@@ -46,7 +46,7 @@ public class ExcluirProtocoloTest {
     public void deveExcluirUmProtocolo () {
         RestAssured.given()
                 .when()
-                .delete("/protocolos/{id}", protocolo.getNumeroProtocolo())
+                .delete("/protocolos/{id}", protocolo.getId())
                 .then()
                 .statusCode(HttpStatus.OK.value());
 

@@ -26,7 +26,7 @@ public class ProtocoloService {
         return (List<Protocolo>) protocoloRepository.findAll();
     }
 
-    public Protocolo atualizar (String id, Protocolo protocoloParaAtualizar) {
+    public Protocolo atualizar (Long id, Protocolo protocoloParaAtualizar) {
         Protocolo protocolo = filtrarPorProtocolo(id);
         if (protocolo != null) {
             protocolo.setNumeroProtocolo(protocoloParaAtualizar.getNumeroProtocolo());
@@ -39,11 +39,11 @@ public class ProtocoloService {
         return protocolo;
     }
 
-    public Protocolo filtrarPorProtocolo(String nome) {
-        return protocoloRepository.findById(nome).orElse(null);
+    public Protocolo filtrarPorProtocolo(Long id) {
+        return protocoloRepository.findById(id).orElse(null);
     }
 
-    public void exluirPorId (String id) {
+    public void exluirPorId (Long id) {
         protocoloRepository.deleteById(id);
     }
 }

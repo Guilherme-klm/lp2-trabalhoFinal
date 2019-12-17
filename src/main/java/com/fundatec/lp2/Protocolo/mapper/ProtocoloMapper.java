@@ -14,14 +14,20 @@ public class ProtocoloMapper {
     public ProtocoloOutputDTO mapear (Protocolo protocolo) {
         ProtocoloOutputDTO protocoloOutputDTO =  new ProtocoloOutputDTO();
         protocoloOutputDTO.setNumeroProtocolo(protocolo.getNumeroProtocolo());
-
+        protocoloOutputDTO.setSite(protocolo.getSite());
+        protocoloOutputDTO.setConcessionaria(protocolo.getConcessionaria());
+        protocoloOutputDTO.setUnidadeConsumidora(protocolo.getUnidadeConsumidora());
+        protocoloOutputDTO.setObservacoes(protocolo.getObservacoes());
         return protocoloOutputDTO;
     }
 
     public Protocolo mapear (ProtocoloInputDTO protocoloInputDTO) {
         Protocolo protocolo = new Protocolo();
         protocolo.setNumeroProtocolo(protocoloInputDTO.getNumeroProtocolo());
-
+        protocolo.setSite(protocoloInputDTO.getSite());
+        protocolo.setConcessionaria(protocoloInputDTO.getConcessionaria());
+        protocolo.setUnidadeConsumidora(protocoloInputDTO.getUnidadeConsumidora());
+        protocolo.setObservacoes(protocoloInputDTO.getObservacoes());
         return protocolo;
     }
 
