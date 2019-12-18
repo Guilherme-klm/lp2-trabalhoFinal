@@ -25,6 +25,7 @@ public class ProtocoloApi {
     public ResponseEntity<?> postProtocolos (@Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
         try {
             Protocolo protocolo = protocoloMapper.mapear(protocoloInputDTO);
+            protocolo = protocoloService.incluirProtocolo(protocolo);
             ProtocoloOutputDTO protocoloOutputDTO = protocoloMapper.mapear(protocolo);
             return ResponseEntity.status(HttpStatus.CREATED).body(protocoloOutputDTO);
         } catch (RuntimeException e) {

@@ -16,9 +16,8 @@ public class ProtocoloService {
         this.protocoloRepository = protocoloRepository;
     }
 
-    public Protocolo incluirProtocolo (ProtocoloInputDTO protocoloInputDTO) {
-        Protocolo protocolo = new Protocolo();
-        protocolo.setNumeroProtocolo(protocoloInputDTO.getNumeroProtocolo());
+    public Protocolo incluirProtocolo (Protocolo protocolo) {
+        validarNumeroDeProtocolo(protocolo);
         return protocoloRepository.save(protocolo);
     }
 
@@ -45,5 +44,11 @@ public class ProtocoloService {
 
     public void exluirPorId (Long id) {
         protocoloRepository.deleteById(id);
+    }
+
+    public void validarNumeroDeProtocolo (Protocolo protocolo) {
+        if (getProtocolo().contains(protocolo.getNumeroProtocolo())) {
+            throw new RuntimeException ("Já existe este número de protocolo");
+        }
     }
 }
