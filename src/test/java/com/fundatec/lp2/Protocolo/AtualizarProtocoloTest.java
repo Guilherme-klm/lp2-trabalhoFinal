@@ -35,7 +35,8 @@ public class AtualizarProtocoloTest {
 
         protocoloRepository.deleteAll();
 
-        protocolo.setNumeroProtocolo("2019RXUEA");
+        protocolo = new Protocolo();
+        protocolo.setNumeroProtocolo("233121235764530");
         protocolo.setSite("U51003");
         protocolo.setUnidadeConsumidora("VIVO");
         protocolo.setConcessionaria("CEEE");
@@ -46,24 +47,24 @@ public class AtualizarProtocoloTest {
 
     @Test
     public void deveAtualizarUmProtocolo () {
-    ProtocoloOutputDTO protocoloOutputDTO = RestAssured.given()
-               .contentType(MediaType.APPLICATION_JSON_VALUE)
-               .accept(MediaType.APPLICATION_JSON_VALUE)
-               .body("{\n" +
-                       "\t\"numeroProtocolo\": \"2019RXFON\",\n" +
-                       "\t\"site\": \"RSROD0193\",\n" +
-                       "\t\"unidadeConsumidora\": \"CLARO\",\n" +
-                       "\t\"concessionaria\": \"CEEE\",\n" +
-                       "\t\"observacoes\": \"Houve um acidente\"\n" +
-                       "}")
-               .when()
-               .put("/protocolos/{id}", protocolo.getId())
-               .then()
-               .statusCode(HttpStatus.OK.value())
-               .extract()
-               .as(ProtocoloOutputDTO.class);
+        ProtocoloOutputDTO protocoloOutputDTO = RestAssured.given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body("{\n" +
+                        "\t\"numeroProtocolo\": \"233121235764534\",\n" +
+                        "\t\"site\": \"RSROD0193\",\n" +
+                        "\t\"unidadeConsumidora\": \"CLARO\",\n" +
+                        "\t\"concessionaria\": \"CEEE\",\n" +
+                        "\t\"observacoes\": \"Houve um acidente\"\n" +
+                        "}")
+                .when()
+                .put("/protocolos/{id}", protocolo.getId())
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .extract()
+                .as(ProtocoloOutputDTO.class);
 
-        Assert.assertEquals("2019RXFON", protocoloOutputDTO.getNumeroProtocolo());
+        Assert.assertEquals("233121235764534", protocoloOutputDTO.getNumeroProtocolo());
         Assert.assertEquals("RSROD0193", protocoloOutputDTO.getSite());
         Assert.assertEquals("CLARO", protocoloOutputDTO.getUnidadeConsumidora());
         Assert.assertEquals("CEEE", protocoloOutputDTO.getConcessionaria());

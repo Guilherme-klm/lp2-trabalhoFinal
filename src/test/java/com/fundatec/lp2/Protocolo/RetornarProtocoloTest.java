@@ -35,7 +35,7 @@ public class RetornarProtocoloTest {
         protocoloRepository.deleteAll();
 
         protocolo = new Protocolo();
-        protocolo.setNumeroProtocolo("2019RXFON");
+        protocolo.setNumeroProtocolo("233121235764530");
         protocolo.setSite("U53001");
         protocolo.setUnidadeConsumidora("CLARO");
         protocolo.setConcessionaria("CEEE");
@@ -56,7 +56,7 @@ public class RetornarProtocoloTest {
                 .extract()
                 .as(ProtocoloOutputDTO.class);
 
-        Assert.assertEquals("2019RXFON", protocoloOutputDTO.getNumeroProtocolo());
+        Assert.assertEquals("233121235764530", protocoloOutputDTO.getNumeroProtocolo());
         Assert.assertEquals("U53001", protocoloOutputDTO.getSite());
         Assert.assertEquals("CLARO", protocoloOutputDTO.getUnidadeConsumidora());
         Assert.assertEquals("CEEE", protocoloOutputDTO.getConcessionaria());

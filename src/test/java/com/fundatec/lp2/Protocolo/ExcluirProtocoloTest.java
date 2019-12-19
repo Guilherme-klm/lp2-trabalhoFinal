@@ -33,7 +33,7 @@ public class ExcluirProtocoloTest {
         protocoloRepository.deleteAll();
 
         protocolo = new Protocolo();
-        protocolo.setNumeroProtocolo("2019RXUEA");
+        protocolo.setNumeroProtocolo("233121235764530");
         protocolo.setSite("U51003");
         protocolo.setUnidadeConsumidora("VIVO");
         protocolo.setConcessionaria("CEEE");

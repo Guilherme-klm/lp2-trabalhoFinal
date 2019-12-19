@@ -38,7 +38,7 @@ public class IncluirProtocoloTest {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .body("{\n" +
-                        "\t\"numeroProtocolo\": \"2020TRAB\",\n" +
+                        "\t\"numeroProtocolo\": \"233121235764530\",\n" +
                         "\t\"site\": \"18RSSSN0291\",\n" +
                         "\t\"unidadeConsumidora\": \"VIVO\",\n" +
                         "\t\"concessionaria\": \"CEEE\",\n" +
@@ -51,10 +51,28 @@ public class IncluirProtocoloTest {
                 .extract()
                 .as(ProtocoloInputDTO.class);
 
-        Assert.assertEquals("2020TRAB", protocoloInputDTO.getNumeroProtocolo());
+        Assert.assertEquals("233121235764530", protocoloInputDTO.getNumeroProtocolo());
         Assert.assertEquals("18RSSSN0291", protocoloInputDTO.getSite());
         Assert.assertEquals("VIVO", protocoloInputDTO.getUnidadeConsumidora());
         Assert.assertEquals("CEEE", protocoloInputDTO.getConcessionaria());
         Assert.assertEquals("Acidente em um poste", protocoloInputDTO.getObservacoes());
+    }
+
+    @Test
+    public void deveDarExcecaoQuandoPorMenosDe15NumerosNoProtocolo() {
+        RestAssured.given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body("{\n" +
+                        "\t\"numeroProtocolo\": \"23312123576453\",\n" +
+                        "\t\"site\": \"053881\",\n" +
+                        "\t\"unidadeConsumidora\": \"234892[MOB]\",\n" +
+                        "\t\"concessionaria\": \"RGE\",\n" +
+                        "\t\"observacoes\": \"Houve um acidente\"\n" +
+                        "}")
+                .when()
+                .post("/protocolos")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 }

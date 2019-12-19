@@ -31,7 +31,6 @@ public class ProtocoloMapper {
         return protocolo;
     }
 
-
     public List<ProtocoloOutputDTO> mapear (List<Protocolo> protocolos) {
         List<ProtocoloOutputDTO> protocoloOutputDTOList =  new ArrayList();
         for (Protocolo protocolo: protocolos) {
