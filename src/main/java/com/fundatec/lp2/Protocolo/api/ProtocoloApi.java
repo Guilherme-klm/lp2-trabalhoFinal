@@ -1,8 +1,14 @@
 package com.fundatec.lp2.Protocolo.api;
 
+import com.fundatec.lp2.Protocolo.dto.ErroDTO;
+import com.fundatec.lp2.Protocolo.dto.ProtocoloInputDTO;
+import com.fundatec.lp2.Protocolo.dto.ProtocoloOutputDTO;
 import com.fundatec.lp2.Protocolo.mapper.ProtocoloMapper;
 import com.fundatec.lp2.Protocolo.model.Protocolo;
 import com.fundatec.lp2.Protocolo.service.ProtocoloService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +30,7 @@ public class ProtocoloApi {
     @PostMapping("/protocolos")
     @ApiOperation(value = "Inclui Protocolo", 
                   notes = "Inclui um protocolo no banco de dados. Faz a validação dos campos necessários a serem preenchidos")
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "Protocolo incluído com sucesso!", response = CarroOutputDTO.class)})
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "Protocolo incluído com sucesso!", response = ProtocoloOutputDTO.class)})
     public ResponseEntity<?> postProtocolos (@Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
         try {
             Protocolo protocolo = protocoloMapper.mapear(protocoloInputDTO);
@@ -40,7 +46,7 @@ public class ProtocoloApi {
 
     @PutMapping("/protocolos/{id}")
     @ApiOperation(value = "Edita Protocolo", notes = "Edita um certo protocolo quando inserido o ID")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolo Atualizado com sucesso!", response = CarroOutputDTO.class)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolo Atualizado com sucesso!", response = ProtocoloOutputDTO.class)})
     public ResponseEntity<?> atualizarProtocolo (@PathVariable Long id,
                                                  @Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
 
@@ -56,7 +62,7 @@ public class ProtocoloApi {
 
     @GetMapping("/protocolos")
     @ApiOperation(value = "Busca Protocolos", notes = "Busca todos os protocolos do banco de dados")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolos encontrados!", response = CarroOutputDTO.class)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolos encontrados!", response = ProtocoloOutputDTO.class)})
     public ResponseEntity<?> getProtocolos () {
         List<Protocolo> protocoloOutputDTOList = protocoloService.getProtocolo();
         return getResponseEntity(protocoloOutputDTOList);
@@ -64,10 +70,19 @@ public class ProtocoloApi {
 
     @GetMapping("/protocolos/{id}")
     @ApiOperation(value = "Busca Protocolo", notes = "Busca um certo protocolo quando inserido o ID")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Achei!", response = CarroOutputDTO.class)})
-    public ResponseEntity<ProtocoloOutputDTO> getProtocoloId (@PathVariable Long id) {
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Achei!", response = ProtocoloOutputDTO.class)})
+    public ResponseEntity<?> getProtocoloId (@PathVariable Long id) {
         Protocolo protocolo = protocoloService.filtrarPorProtocolo(id);
 
+        if (protocolo == null) {
+            return ResponseEntity.noContent().build();
+        } else {
+            ProtocoloOutputDTO protocoloOutputDTO = protocoloMapper.mapear(protocolo);
+            return ResponseEntity.ok(protocoloOutputDTO);
+        }
+    }
+
+    private ResponseEntity<?> getResponseEntity(Protocolo protocolo) {
         if (protocolo == null) {
             return ResponseEntity.noContent().build();
         } else {

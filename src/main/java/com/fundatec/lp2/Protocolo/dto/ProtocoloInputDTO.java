@@ -1,12 +1,12 @@
-package com.fundatec.lp2.Protocolo.api;
+package com.fundatec.lp2.Protocolo.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 
 public class ProtocoloInputDTO {
 
     @NotEmpty(message="Este campo não pode ser vazio")
     @NotNull(message = "Não pode ser nulo")
-    @Pattern(regexp = "^[0-9]$", message = "Protocolo inválido")
+    @Pattern(regexp = "^[0-9]{15}$", message = "Protocolo inválido")
     private String numeroProtocolo;
     
     @NotEmpty(message="Este campo não pode ser vazio")

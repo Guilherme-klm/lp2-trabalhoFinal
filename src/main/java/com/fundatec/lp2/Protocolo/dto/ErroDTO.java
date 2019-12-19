@@ -1,4 +1,4 @@
-package com.fundatec.lp2.Protocolo.api;
+package com.fundatec.lp2.Protocolo.dto;
 
 public class ErroDTO {
 

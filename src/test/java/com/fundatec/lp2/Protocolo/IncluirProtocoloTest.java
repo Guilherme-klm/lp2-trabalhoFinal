@@ -1,7 +1,6 @@
 package com.fundatec.lp2.Protocolo;
 
-import com.fundatec.lp2.Protocolo.api.ProtocoloInputDTO;
-import com.fundatec.lp2.Protocolo.model.Protocolo;
+import com.fundatec.lp2.Protocolo.dto.ProtocoloInputDTO;
 import com.fundatec.lp2.Protocolo.repository.ProtocoloRepository;
 import io.restassured.RestAssured;
 import org.junit.Assert;

@@ -1,6 +1,6 @@
 package com.fundatec.lp2.Protocolo;
 
-import com.fundatec.lp2.Protocolo.api.ProtocoloOutputDTO;
+import com.fundatec.lp2.Protocolo.dto.ProtocoloOutputDTO;
 import com.fundatec.lp2.Protocolo.model.Protocolo;
 import com.fundatec.lp2.Protocolo.repository.ProtocoloRepository;
 import io.restassured.RestAssured;
@@ -35,7 +35,6 @@ public class AtualizarProtocoloTest {
 
         protocoloRepository.deleteAll();
 
-        protocolo = new Protocolo();
         protocolo.setNumeroProtocolo("2019RXUEA");
         protocolo.setSite("U51003");
         protocolo.setUnidadeConsumidora("VIVO");

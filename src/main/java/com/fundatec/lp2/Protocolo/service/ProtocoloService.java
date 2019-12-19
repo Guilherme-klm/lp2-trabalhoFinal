@@ -1,6 +1,5 @@
 package com.fundatec.lp2.Protocolo.service;
 
-import com.fundatec.lp2.Protocolo.api.ProtocoloInputDTO;
 import com.fundatec.lp2.Protocolo.model.Protocolo;
 import com.fundatec.lp2.Protocolo.repository.ProtocoloRepository;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.fundatec.lp2.Protocolo.mapper;
 
-import com.fundatec.lp2.Protocolo.api.ProtocoloInputDTO;
-import com.fundatec.lp2.Protocolo.api.ProtocoloOutputDTO;
+import com.fundatec.lp2.Protocolo.dto.ProtocoloInputDTO;
+import com.fundatec.lp2.Protocolo.dto.ProtocoloOutputDTO;
 import com.fundatec.lp2.Protocolo.model.Protocolo;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +30,7 @@ public class ProtocoloMapper {
         protocolo.setObservacoes(protocoloInputDTO.getObservacoes());
         return protocolo;
     }
+
 
     public List<ProtocoloOutputDTO> mapear (List<Protocolo> protocolos) {
         List<ProtocoloOutputDTO> protocoloOutputDTOList =  new ArrayList();
