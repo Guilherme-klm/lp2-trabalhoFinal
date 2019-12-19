@@ -22,6 +22,9 @@ public class ProtocoloApi {
     }
 
     @PostMapping("/protocolos")
+    @ApiOperation(value = "Inclui Protocolo", 
+                  notes = "Inclui um protocolo no banco de dados. Faz a validação dos campos necessários a serem preenchidos")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "Protocolo incluído com sucesso!", response = CarroOutputDTO.class)})
     public ResponseEntity<?> postProtocolos (@Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
         try {
             Protocolo protocolo = protocoloMapper.mapear(protocoloInputDTO);
@@ -36,6 +39,8 @@ public class ProtocoloApi {
     }
 
     @PutMapping("/protocolos/{id}")
+    @ApiOperation(value = "Edita Protocolo", notes = "Edita um certo protocolo quando inserido o ID")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolo Atualizado com sucesso!", response = CarroOutputDTO.class)})
     public ResponseEntity<?> atualizarProtocolo (@PathVariable Long id,
                                                  @Valid @RequestBody ProtocoloInputDTO protocoloInputDTO) {
 
@@ -50,12 +55,16 @@ public class ProtocoloApi {
     }
 
     @GetMapping("/protocolos")
+    @ApiOperation(value = "Busca Protocolos", notes = "Busca todos os protocolos do banco de dados")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolos encontrados!", response = CarroOutputDTO.class)})
     public ResponseEntity<?> getProtocolos () {
         List<Protocolo> protocoloOutputDTOList = protocoloService.getProtocolo();
         return getResponseEntity(protocoloOutputDTOList);
     }
 
     @GetMapping("/protocolos/{id}")
+    @ApiOperation(value = "Busca Protocolo", notes = "Busca um certo protocolo quando inserido o ID")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Achei!", response = CarroOutputDTO.class)})
     public ResponseEntity<ProtocoloOutputDTO> getProtocoloId (@PathVariable Long id) {
         Protocolo protocolo = protocoloService.filtrarPorProtocolo(id);
 
@@ -68,6 +77,8 @@ public class ProtocoloApi {
     }
 
     @DeleteMapping("/protocolos/{id}")
+    @ApiOperation(value = "Protocolo Carro", notes = "Deleta um certo protocolo quando inserido o ID")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Protocolo deletado com sucesso!")})
     public ResponseEntity<?> excluirProtocolo (@PathVariable Long id) {
         protocoloService.exluirPorId(id);
         return ResponseEntity.ok().build();
