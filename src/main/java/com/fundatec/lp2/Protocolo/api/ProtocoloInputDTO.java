@@ -4,11 +4,24 @@ import javax.validation.constraints.NotBlank;
 
 public class ProtocoloInputDTO {
 
-    @NotBlank(message = "Campo protocolo é obrigatório!")
+    @NotEmpty(message="Este campo não pode ser vazio")
+    @NotNull(message = "Não pode ser nulo")
+    @Pattern(regexp = "^[0-9]$", message = "Protocolo inválido")
     private String numeroProtocolo;
+    
+    @NotEmpty(message="Este campo não pode ser vazio")
+    @NotNull(message = "Não pode ser nulo")
     private String site;
+    
+    @NotEmpty(message="Este campo não pode ser vazio")
+    @NotNull(message = "Não pode ser nulo")
     private String unidadeConsumidora;
+    
+    @NotEmpty(message="Este campo não pode ser vazio")
+    @NotNull(message = "Não pode ser nulo")
     private String concessionaria;
+    
+    @Size(max=350, message= "Não pode ter mais de 350 caracteres")
     private String observacoes;
 
     public String getNumeroProtocolo() {
