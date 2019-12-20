@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 .globalResponseMessage(RequestMethod.PUT, defaultResponses)
                 .select()
                 .paths(PathSelectors.any())
-                .apis(RequestHandlerSelectors.basePackage("br.com.fundatec"))
+                .apis(RequestHandlerSelectors.basePackage("com.fundatec.lp2.Protocolo"))
                 .build();
     }
 
