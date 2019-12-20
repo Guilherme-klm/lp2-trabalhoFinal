@@ -44,7 +44,7 @@ Ele deverá incluir:
 **ProtocoloService**
 - Classe onde fica as regras de negócio. É instanciado a classe **ProtocoloRepository** para ter conexao com o banco de dados. Possui métodos de validação, inclusão, exlusão, filtrar por ID, atualizar e buscar.
 
-## Swagger
+## SWAGGER
 **SwaggerConfig**
 - Ajuda na documentação legível e modelagem da aplicação, mostrando todos os métodos e classes do **Model**.
 
